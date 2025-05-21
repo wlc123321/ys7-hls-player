@@ -2,21 +2,35 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>视频播放</title>
+		<title>摄像头直播</title>
+		<style>
+			html,
+			body {
+				margin: 0;
+				padding: 0;
+				background: black;
+			}
+
+			video {
+				width: 100vw;
+				height: 100vh;
+				background: black;
+			}
+		</style>
 	</head>
 	<body>
-		<video id="video" controls autoplay width="100%" height="auto"></video>
+		<video id="video" controls autoplay></video>
 		<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 		<script>
-			if (Hls.isSupported()) {
-				var video = document.getElementById('video');
-				var hls = new Hls();
-				hls.loadSource('https://hls.open.ys7.com/openlive/xxx.m3u8'); // 替换为你获取的地址
-				hls.attachMedia(video);
-				hls.on(Hls.Events.MANIFEST_PARSED, function() {
-					video.play();
-				});
-			}
+			const video = document.getElementById('video');
+			const hls = new Hls();
+			hls.loadSource(
+				'https://open.ys7.com/v3/openlive/BF5896654_1_2.m3u8?expire=1747854291&id=845245752813576192&t=2bec84f83024b37d12787306158deb1fa6a37cd057e1267fb38b5132f31c55e7&ev=100'
+				);
+			hls.attachMedia(video);
+			hls.on(Hls.Events.MANIFEST_PARSED, function() {
+				video.play();
+			});
 		</script>
 	</body>
 </html>
